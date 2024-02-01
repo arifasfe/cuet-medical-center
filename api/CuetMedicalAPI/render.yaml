@@ -1,20 +1,13 @@
-databases:
- - name: CuetMedicalAPI
-    databaseName: CuetMedicalAPI
-    user: CuetMedicalAPI
-
 services:
- - type: web
-    name: CuetMedicalAPI
-    runtime: python
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn CuetMedicalAPI.wsgi:application"
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: CuetMedicalAPI
-          property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
-      - key: WEB_CONCURRENCY
-        value: 4
+- type: web
+ name: CuetMedicalAPI
+ env: python
+ buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+ startCommand: gunicorn CuetMedicalAPI.wsgi
+ envVars:
+ - key: DJANGO_SETTINGS_MODULE
+    value: CuetMedicalAPI.settings
+ - key: DATABASE_URL
+    fromDatabase: sqlite
+ - key: SECRET_KEY
+    fromSecret: "django-insecure-)ve*s3#@$$!7e63-%xr_dj_i5@w5vvntv(tdib&liax-)u90cx"
