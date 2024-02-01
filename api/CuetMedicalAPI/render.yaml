@@ -1,6 +1,6 @@
 services:
 - type: web
- name: backend
+ name: CuetMedicalAPI
  env: python
  buildCommand: pip install -r api/CuetMedicalAPI/requirements.txt && python api/CuetMedicalAPI/manage.py collectstatic --noinput
  startCommand: gunicorn api.CuetMedicalAPI.wsgi
@@ -13,6 +13,6 @@ services:
       fromSecret: "django-insecure-)ve*s3#@$$!7e63-%xr_dj_i5@w5vvntv(tdib&liax-)u90cx"
 
 - type: static-site
- name: frontend
+ name: cuetmedicalui
  buildCommand: cd ui/cuetmedicalui && npm install && npm run build
  publishDir: ui/cuetmedicalui/build
