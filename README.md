@@ -20,7 +20,7 @@ This project showcases a demo web application designed and developed for the Chi
 
 * **Introducing E-Booklet System:** Students can access their E-Booklet instead of physical booklet.
 * **Search and Filter:** Quickly find relevant E-Booklets using keyword search and filter options for the admins.
-* **Roster:** Digitalized roster system for the doctots
+* **Roster:** Digitalized roster system for the doctors
 ## Project Goals
 
 * Enhance accessibility of E-booklett for CUET Medical Center students.
