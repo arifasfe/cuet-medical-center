@@ -27,7 +27,7 @@ This project showcases a demo web application designed and developed for the Chi
 * Improve efficiency in information delivery and retrieval.
 * Offer a platform for continuous improvement and feature expansion.
 
-## Getting Started
+## Current State
 
 This repository primarily serves as a showcase of the project concept and its implementation details.
 
@@ -42,6 +42,7 @@ This repository primarily serves as a showcase of the project concept and its im
 ![Aui9](https://github.com/arifasfe/cuet-medical-center/assets/67276690/9745fea1-e44e-4963-86f1-f53480309041)
 ![Aui10](https://github.com/arifasfe/cuet-medical-center/assets/67276690/1a8b1341-13e7-45b3-8d70-724d55fce030)
 ![Aui11](https://github.com/arifasfe/cuet-medical-center/assets/67276690/3230c7fb-22e9-41d8-9875-ae3d663884f0)
+
 ![Aui12](https://github.com/arifasfe/cuet-medical-center/assets/67276690/31dbb8fb-9ed0-43a9-a8a1-7f32aef3e3ed)
 ![Aui14](https://github.com/arifasfe/cuet-medical-center/assets/67276690/74076704-f564-487f-9c6d-c1552567da4c)
 ![Aui15](https://github.com/arifasfe/cuet-medical-center/assets/67276690/a092cc33-04c7-4043-a6c7-1a12d31ff937)
@@ -50,5 +51,5 @@ This repository primarily serves as a showcase of the project concept and its im
 ![Sui4](https://github.com/arifasfe/cuet-medical-center/assets/67276690/cc97f26e-f9da-49f6-bbde-e26a76ba9fca)
 
 ## Documentation
-View the project details on Overleaf: [CUET Medical Center E-Booklet System](https://www.overleaf.com/read/gcsgtkjqhdsb#8367a4)
+View the project details: [CUET_Medical_Center_Web_Application Documentation.pdf](https://github.com/arifasfe/cuet-medical-center/files/14151774/CUET_Medical_Center_Web_Application.pdf)
 
