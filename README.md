@@ -52,4 +52,3 @@ This repository primarily serves as a showcase of the project concept and its im
 
 ## Documentation
 View the project details: [CUET_Medical_Center_Web_Application Documentation.pdf](https://github.com/arifasfe/cuet-medical-center/files/14151774/CUET_Medical_Center_Web_Application.pdf)
-
