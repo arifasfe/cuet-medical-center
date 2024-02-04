@@ -18,7 +18,6 @@ export class Prescriptions extends Component {
             temp: "",
             weight: "",
             age: "",
-            confirmation: "",
             doctor: {
                 doctor_id: "",
                 doctor_name: "",

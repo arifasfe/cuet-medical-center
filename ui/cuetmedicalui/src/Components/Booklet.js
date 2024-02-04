@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import variables from './../variables';
-import { Link, Navigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { Button, Table, Modal, ModalHeader, ModalBody, FormGroup, Label, Input, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 export class Booklet extends Component {
@@ -61,8 +61,7 @@ export class Booklet extends Component {
                                 hall_name: student.hall_name,
                                 room_no: student.room_no,
                                 image: student.image,
-                                gender: student.gender,
-                                blood_group: student.blood_group
+                                gender: student.gender
 
                             };
                         }

@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { Button, Alert, Badge, Modal, ModalHeader, ModalBody, FormGroup, Label, Input, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { Button, Alert, Badge, Modal, ModalHeader, ModalBody,Input, ModalFooter, Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import variables from './../variables';
 
 export class StudentBooklet extends Component {

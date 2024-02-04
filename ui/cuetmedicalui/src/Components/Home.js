@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardText, CardTitle, Row, Col } from 'reactstrap';
+import { Card, CardBody, CardText, CardTitle} from 'reactstrap';
 import { getCurrentDayOfWeek, getCurrentTimeSlot } from './Roster';
 import { FaUserCheck, FaUserAlt, FaUserGraduate, FaClock } from 'react-icons/fa';
 import variables from '../variables';

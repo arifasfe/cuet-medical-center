@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import variables from './../variables';
-import { Button, Table, Alert, Modal, ModalHeader, ModalBody, FormGroup, Label, Input, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Table, Alert} from 'reactstrap';
 
 
 /* function getMonthName(monthNumber) {

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Card, CardBody, CardTitle, CardText } from 'reactstrap';
 import variables from './../variables';
 import PropTypes from 'prop-types';
