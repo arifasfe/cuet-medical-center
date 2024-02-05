@@ -6,28 +6,28 @@ export class Doctor extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            doctor_id : 0,
+            doctor_id: 0,
             doctors: [],
             modalTitle: "",
-            doctor_name : "", 
-            specialization : "",
-            address : "", 
-            phone : "",
+            doctor_name: "",
+            specialization: "",
+            address: "",
+            phone: "",
             showModal: false
         }
     }
 
-refreshList() {
-   fetch(variables.API_URL + 'doctor/')
-       .then(response => response.json())
-       .then(data => {
-           if ('data' in data && Array.isArray(data.data)) {
-               this.setState({ doctors: data.data });
-           } else {
-               console.error('Expected an object with a data property containing an array, but got ', data);
-           }
-       });
-}
+    refreshList() {
+        fetch(variables.API_URL + 'doctor/')
+            .then(response => response.json())
+            .then(data => {
+                if ('data' in data && Array.isArray(data.data)) {
+                    this.setState({ doctors: data.data });
+                } else {
+                    console.error('Expected an object with a data property containing an array, but got ', data);
+                }
+            });
+    }
 
 
     componentDidMount() {
@@ -55,15 +55,15 @@ refreshList() {
     addClick = () => {
         this.setState({
             modalTitle: "Register Doctor",
-            doctor_id : 0,
-            doctor_name : "", 
-            specialization : "",
-            address : "", 
-            phone : ""
+            doctor_id: 0,
+            doctor_name: "",
+            specialization: "",
+            address: "",
+            phone: ""
         });
         this.toggle();
     }
-    
+
     editClick = (doc) => {
         this.setState({
             modalTitle: "Edit Doctor Information",
@@ -75,7 +75,7 @@ refreshList() {
         });
         this.toggle();
     }
-    
+
 
     createClick = () => {
         fetch(variables.API_URL + 'doctor/', {
@@ -102,7 +102,7 @@ refreshList() {
     }
 
     updateClick = () => {
-        fetch(variables.API_URL + '/doctor/' + this.state.doctor_id+'/', {
+        fetch(variables.API_URL + '/doctor/' + this.state.doctor_id + '/', {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
@@ -159,43 +159,43 @@ refreshList() {
 
         return (
             <div style={{ margin: '20px', padding: '20px' }}>
-            <Button color="primary" className="float-end" onClick={this.addClick}>
-                Register Doctor
-            </Button>
-            <Table striped style={{ marginTop: '20px' }}>
-                <thead>
-                    <tr>
-                        <th>DoctorName</th>
-                        <th>Specialization</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {doctors.map(doc =>
-                        <tr key={doc.doctor_id}>
-                            <td>{doc.doctor_name}</td>
-                            <td>{doc.specialization}</td>
-                            <td>{doc.phone}</td>
-                            <td>{doc.address}</td>
-                            <td>
-                                <Button style={{marginRight: "15px"}} outline onClick={() => this.editClick(doc)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
+                <Button color="primary" className="float-end" onClick={this.addClick}>
+                    Register Doctor
+                </Button>
+                <Table striped style={{ marginTop: '20px' }}>
+                    <thead>
+                        <tr>
+                            <th>DoctorName</th>
+                            <th>Specialization</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {doctors.map(doc =>
+                            <tr key={doc.doctor_id}>
+                                <td>{doc.doctor_name}</td>
+                                <td>{doc.specialization}</td>
+                                <td>{doc.address}</td>
+                                <td>{doc.phone}</td>
+                                <td>
+                                    <Button style={{ marginRight: "15px" }} outline onClick={() => this.editClick(doc)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                             <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                </svg>
-                                </Button>
-                                <Button outline color="danger" onClick={() => this.deleteClick(doc.doctor_id)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
-                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-                                </svg>
-                                </Button>
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </Table>
+                                        </svg>
+                                    </Button>
+                                    <Button outline color="danger" onClick={() => this.deleteClick(doc.doctor_id)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
+                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                                        </svg>
+                                    </Button>
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </Table>
 
                 <Modal isOpen={showModal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>{modalTitle}</ModalHeader>
