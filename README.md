@@ -9,8 +9,8 @@ This project showcases a demo web application designed and developed for the Chi
 * GitHub: [@smhproduct](https://github.com/smhproduct)
 
 👤 **Arif Mohammad Asfe**
-* LinkedIn: [@arifasfe](https://www.linkedin.com/in/arifasfe/)
-* GitHub: [@arifasfe](https://github.com/arifasfe)
+* LinkedIn: [Arif Mohammad Asfe](https://www.linkedin.com/in/arifasfe/)
+* GitHub: [arifasfe](https://github.com/arifasfe)
 
 👤 **Rajarshi Sen**
 * GitHub: [Rajarshi-sen24](https://github.com/Rajarshi-sen24)
