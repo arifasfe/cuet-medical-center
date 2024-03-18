@@ -294,7 +294,27 @@ export class PrescriptionForm extends Component {
 
 
 
-                    
+                    <Row>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="last_checkup_id">Last Checkup Id</Label>
+                                <Input type="number" name="last_checkup_id" id="last_checkup_id" value={this.state.last_checkup_id} onChange={this.changeLast_checkup_id} />
+                            </FormGroup>
+
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="pulse_rate">Pulse Rate (bpm)</Label>
+                                <Input type="number" name="pulse_rate" id="pulse_rate" value={this.state.pulse_rate} onChange={this.changePulse_rate} />
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label for="bp">Blood Pressure(mmHg)</Label>
+                                <Input type="text" name="bp" id="bp" value={this.state.bp} onChange={this.changeBp} />
+                            </FormGroup>
+                        </Col>
+                    </Row>
                     <Row>
                         <Col md={4}>
                             <FormGroup>
