@@ -82,9 +82,7 @@ export class StudentBooklet extends Component {
                     this.setState({
                         booklets: data.data
                     });
-                } else {
-                    console.error('Expected an object with a data property containing a single booklet object, but got ', data);
-                }
+                } 
             });
 
         fetch(variables.API_URL + 'doctor/')
