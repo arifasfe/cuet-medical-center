@@ -82,7 +82,9 @@ export class StudentBooklet extends Component {
                     this.setState({
                         booklets: data.data
                     });
-                } 
+                } else {
+                    console.error('Expected an object with a data property containing a single booklet object, but got ', data);
+                }
             });
 
         fetch(variables.API_URL + 'doctor/')
@@ -111,7 +113,7 @@ export class StudentBooklet extends Component {
             const dateA = new Date(a.date_time).getTime();
             const dateB = new Date(b.date_time).getTime();
 
-            // Return a negative, zero, or positive value depending on whether dateA is less than, equal to, or greater than dateB
+            
             return dateB - dateA;
         });
 
@@ -138,22 +140,24 @@ export class StudentBooklet extends Component {
             modalOpen: true,
             modalMessage: message,
         }, () => {
-            console.log(this.state.modalOpen); // Log the state after it's been updated
+            console.log(this.state.modalOpen);
         });
     }
     
-    closeModal() {
-        this.setState({
-            modalOpen: false,
-            modalMessage: '',
-        });
-    }
+    
 
     toggleConfirmModal = () => {
         this.setState(prevState => ({
           confirmModalOpen: !prevState.confirmModalOpen,
         }));
      };
+
+     closeModal() {
+        this.setState({
+            modalMessage: '',
+            modalOpen: false,
+        });
+    }
     
      handleConfirm = async () => {
         // Logic to update the confirmation status
@@ -232,28 +236,28 @@ export class StudentBooklet extends Component {
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Diagnosis</div>
+                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>Diagnosis</div>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{prescription.diagnosis}</CardSubtitle>
                                             </CardBody>
                                         </Card>
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>R<sub>x</sub></div>
+                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>R<sub>x</sub></div>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{prescription.rx}</CardSubtitle>
                                             </CardBody>
                                         </Card>
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Investigation</div>
+                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>Investigation</div>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{prescription.investigation}</CardSubtitle>
                                             </CardBody>
                                         </Card>
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Lifestyle</div>
+                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>Lifestyle</div>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">{prescription.lifestyle}</CardSubtitle>
                                             </CardBody>
                                         </Card>
@@ -263,7 +267,7 @@ export class StudentBooklet extends Component {
                                 {this.state.selectedPrescription === prescription.prescription_id && !this.state.confirmation[prescription.prescription_id] && !this.state.updatedPrescriptions.includes(prescription.prescription_id) && (
                                     <Card style={{ border: 'none' }}>
                                         <CardBody>
-                                            <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Confirmation</div>
+                                            <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>Confirmation</div>
                                             <Button color="primary" onClick={this.toggleConfirmModal}>Update Confirmation</Button>
                                         </CardBody>
                                     </Card>
