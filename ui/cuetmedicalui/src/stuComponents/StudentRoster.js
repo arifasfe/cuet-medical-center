@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import variables from './../variables';
-import { Table, Alert} from 'reactstrap';
-
-
-/* function getMonthName(monthNumber) {
-  const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-  ];
-  return months[monthNumber - 1];
-} */
+import { Table, Alert } from 'reactstrap';
 
 function getMonthName() {
     const months = [
@@ -21,10 +12,10 @@ function getMonthName() {
 }
 export function getCurrentTimeSlot() {
     const hours = new Date().getHours();
-    if (hours >= 21 || hours < 9) {
-        return 'Evening';
-    } else if (hours >= 9 && hours < 15) {
+    if (hours >= 9 && hours < 15) {
         return 'Morning';
+    } else if (hours >= 21 || hours < 9) {
+        return 'Evening';
     } else {
         return 'Noon';
     }
@@ -159,14 +150,11 @@ export class StudentRoster extends Component {
             },
 
         } = this.state;
-        /* const now = new Date();
-        const utcMonth = now.getUTCMonth() + 1; // getUTCMonth returns 0-based month index, so we add 1
-        const utcYear = now.getUTCFullYear(); */
+
         const now = new Date();
-        const utcMonth = now.getUTCMonth() + 1; // getUTCMonth returns 0-based month index, so we add 1
+        const utcMonth = now.getUTCMonth() + 1;
         const utcYear = now.getUTCFullYear();
         const currentDayOfWeek = getCurrentDayOfWeek();
-        const currentTimeSlot = getCurrentTimeSlot();
         const currentDoctor = this.state.rosters.find(roster => roster.dayslot.day === currentDayOfWeek && roster.dayslot.slot === getCurrentTimeSlot());
 
 
@@ -175,7 +163,7 @@ export class StudentRoster extends Component {
             <div>
                 <div color="secondary" className="mt-3 mx-auto" style={{ maxWidth: '80%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', gap: '1rem' }}>
-                    <Alert color="primary" className="float-start">
+                        <Alert color="primary" className="float-start">
                             Doctor Roster:<h4> {getMonthName(rosters[0]?.month)} </h4>
                         </Alert>
                         <Alert color="info " className="float-start">
@@ -191,18 +179,17 @@ export class StudentRoster extends Component {
                             Time Slots: <h6> Morning(9:00-15:00)</h6><h6>Noon(15:00-21:00)</h6><h6>Evening(21:00-9:00)</h6>
                         </Alert>
                     </div>
-                    
+
                 </div>
 
 
                 <Table bordered className="mt-3 mx-auto" style={{ maxWidth: '90%', textAlign: 'center' }}>
                     <thead>
                         <tr>
-                            
+
                             <th>Day</th>
                             <th>Slot</th>
                             <th>Doctor Name</th>
-                            {/* <th>Options</th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -213,11 +200,11 @@ export class StudentRoster extends Component {
                                     if (roster.month === utcMonth && roster.year === utcYear) {
                                         return (
                                             <tr key={roster.roster_id}>
-                                                
-                                                <td>{day }</td>
+
+                                                <td>{day}</td>
                                                 <td>{roster.dayslot.slot}</td>
                                                 <td>{roster.doctor.doctor_name}</td>
-                                                
+
                                             </tr>
                                         );
                                     }
