@@ -6,7 +6,7 @@ This project showcases a demo web application designed and developed for the Chi
 
 👤 **Mohammad Akbar Bin Shah**
 * LinkedIn: [@mohammad-akbar2603](https://www.linkedin.com/in/mohammad-akbar2603/)
-* GitHub: [@smhproduct](https://github.com/smhproduct)
+* GitHub: [mohammadakbar2603](https://github.com/mohammadakbar2603)
 
 👤 **Arif Mohammad Asfe**
 * LinkedIn: [Arif Mohammad Asfe](https://www.linkedin.com/in/arifasfe/)
