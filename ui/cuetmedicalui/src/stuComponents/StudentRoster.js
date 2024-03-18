@@ -161,7 +161,7 @@ export class StudentRoster extends Component {
 
         return (
             <div>
-                <div color="secondary" className="mt-3 mx-auto" style={{ maxWidth: '80%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div color="secondary" className="mt-3 mx-auto" style={{ maxWidth: '85%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div style={{ display: 'flex', gap: '1rem' }}>
                         <Alert color="primary" className="float-start">
                             Doctor Roster:<h4> {getMonthName(rosters[0]?.month)} </h4>
@@ -173,10 +173,10 @@ export class StudentRoster extends Component {
                             Current Time Slot: <h4>{getCurrentTimeSlot()}</h4>
                         </Alert>
                         <Alert color="success" className="float-start">
-                            Doctor on Duty: <h4>{currentDoctor ? currentDoctor.doctor.doctor_name : 'No Doctor Assigned'}</h4>
+                            Doctor on Duty: <h4>{currentDoctor ? currentDoctor.doctor.doctor_name : 'No Doctor Assigned Yet'}</h4>
                         </Alert>
                         <Alert color="dark" className="float-end">
-                            Time Slots: <h6> Morning(9:00-15:00)</h6><h6>Noon(15:00-21:00)</h6><h6>Evening(21:00-9:00)</h6>
+                            Time Slots: <h6> Morning [9:00 - 15:00]</h6><h6>Noon [15:00 - 21:00]</h6><h6>Evening [21:00 - 9:00]</h6>
                         </Alert>
                     </div>
 
