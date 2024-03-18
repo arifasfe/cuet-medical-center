@@ -160,7 +160,6 @@ export class Roster extends Component {
             modalTitle: "Add Roster",
             roster_id: "",
             month: "",
-            year: "",
             selectedDoctorId: "",
             selectedDayslotId: ""
         });
@@ -203,7 +202,6 @@ export class Roster extends Component {
                     body: JSON.stringify({
                         roster_id: this.state.roster_id,
                         month: this.state.month,
-                        year: this.state.year,
                         doctor: this.state.selectedDoctorId,
                         dayslot: this.state.selectedDayslotId
                     })
@@ -373,10 +371,6 @@ export class Roster extends Component {
                                 <option value="11">November</option>
                                 <option value="12">December</option>
                             </Input>
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="year">Year</Label>
-                            <Input type="number" name="year" id="year" value={this.state.year} onChange={this.changeYear} />
                         </FormGroup>
                         <FormGroup>
                             <Label for="doctor">Doctor</Label>
