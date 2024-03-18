@@ -41,6 +41,7 @@ export class StudentBooklet extends Component {
             user: user,
             selectedPrescription: null,
             updatedPrescriptions: [],
+            confirmModalOpen: false,
 
 
         };
@@ -54,30 +55,26 @@ export class StudentBooklet extends Component {
 
     refreshList() {
         fetch(variables.API_URL + 'prescription/')
-            .then(response => response.json())
-            .then(data => {
-                if ('data' in data && Array.isArray(data.data)) {
-                    console.log(data)
-                    let sortedData = data.data
-                        .filter(prescription => prescription.booklet.student.id === this.state.user.id)
-                        .sort((a, b) => {
-                            const dateA = new Date(a.date_time).getTime();
-                            const dateB = new Date(b.date_time).getTime();
-                            return dateB - dateA;
-                        });
-                    // Set the initial state of confirmation based on the data received from the backend
-                    const initialConfirmation = sortedData.reduce((acc, prescription) => {
-                        acc[prescription.prescription_id] = prescription.confirmation || false;
-                        return acc;
-                    }, {});
-                    this.setState({
-                        prescriptions: sortedData,
-                        confirmation: initialConfirmation
-                    });
-                } else {
-                    console.error('Expected an object with a data property containing a single booklet object, but got ', data);
-                }
-            });
+        .then(response => response.json())
+        .then(data => {
+            if ('data' in data && Array.isArray(data.data)) {
+                let sortedData = data.data
+                    .filter(prescription => prescription.booklet.student.id === this.state.user.id)
+                    .sort((a, b) => b.prescription_id - a.prescription_id); // Sort in descending order of prescription_id
+
+                // Set the initial state of confirmation based on the data received from the backend
+                const initialConfirmation = sortedData.reduce((acc, prescription) => {
+                    acc[prescription.prescription_id] = prescription.confirmation || false;
+                    return acc;
+                }, {});
+                this.setState({
+                    prescriptions: sortedData,
+                    confirmation: initialConfirmation
+                });
+            } else {
+                console.error('Expected an object with a data property containing a single booklet object, but got ', data);
+            }
+        });
         fetch(variables.API_URL + 'ebooklet/')
             .then(response => response.json())
             .then(data => {
@@ -153,7 +150,38 @@ export class StudentBooklet extends Component {
             modalMessage: '',
         });
     }
+
+    toggleConfirmModal = () => {
+        this.setState(prevState => ({
+          confirmModalOpen: !prevState.confirmModalOpen,
+        }));
+     };
     
+     handleConfirm = async () => {
+        // Logic to update the confirmation status
+        const response = await fetch(`${variables.API_URL}prescription/${this.state.selectedPrescription}/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                confirmation: true,
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        // Update the confirmation state locally
+        this.setState(prevState => ({
+            confirmation: { ...prevState.confirmation, [this.state.selectedPrescription]: true },
+            confirmModalOpen: false, // Close the modal after confirmation
+        }));
+
+        // Redirect to the same page to reflect the changes
+        window.location.reload();
+    };
 
     render() {
         return (
@@ -235,72 +263,26 @@ export class StudentBooklet extends Component {
                                 </ModalBody>
 
                                 {this.state.selectedPrescription === prescription.prescription_id && !this.state.confirmation[prescription.prescription_id] && !this.state.updatedPrescriptions.includes(prescription.prescription_id) && (
-    <Card style={{ border: 'none' }}>
-        <CardBody>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Confirmation</div>
-            <Input type="checkbox" checked={this.state.confirmation[prescription.prescription_id]} onChange={(e) => {
-                if (e.target.checked) {
-                    if (!this.state.confirmation[prescription.prescription_id]) {
-                        this.setState({ confirmation: { ...this.state.confirmation, [prescription.prescription_id]: true }});
-                    }
-                }
-            }} />
-        </CardBody>
-    </Card>
-)}
+                                    <Card style={{ border: 'none' }}>
+                                        <CardBody>
+                                            <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Confirmation</div>
+                                            <Button color="primary" onClick={this.toggleConfirmModal}>Update Confirmation</Button>
+                                        </CardBody>
+                                    </Card>
+                                )}
+                
+                                <Modal isOpen={this.state.confirmModalOpen} toggle={this.toggleConfirmModal}>
+                                    <ModalHeader toggle={this.toggleConfirmModal}>Confirmation</ModalHeader>
+                                    <ModalBody>
+                                        Do you want to confirm?
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button color="primary" onClick={this.handleConfirm}>Yes</Button>
+                                        <Button color="secondary" onClick={this.toggleConfirmModal}>No</Button>
+                                    </ModalFooter>
+                                </Modal>
 
-               </ModalBody>
-
-                            <ModalFooter>
-                            <Button color="primary" onClick={async () => {
-    // Check if the checkbox is checked before updating the record
-    if (!this.state.confirmation[this.state.selectedPrescription]) {
-        return;
-    }
-
-    // Send a request to your server to update the record
-    fetch(`${variables.API_URL}prescription/${this.state.selectedPrescription}/`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            confirmation: true,
-        })
-    })
-    .then(response => {
-        console.log(response.status);
-        if (response.status === 404) {
-            alert("The requested resource could not be found.");
-        } else if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Update the confirmation state
-        this.setState(prevState => ({
-            confirmation: { ...prevState.confirmation, [this.state.selectedPrescription]: true }
-        }));
-
-        // Add the prescription id to the updatedPrescriptions array
-        this.setState(prevState => ({
-            updatedPrescriptions: [...prevState.updatedPrescriptions, this.state.selectedPrescription]
-        }));
-        window.location.reload(); // Reload the page
-    })
-    .catch(error => {
-        console.error('There has been a problem with your fetch operation:', error);
-        alert("An error occurred while trying to confirm treatment.");
-    });
-}}>
-    Update
-</Button>
-
-
-
-                            </ModalFooter>
-
+                            </ModalBody>
                         </Modal>
                     </Card>
                 ))}
