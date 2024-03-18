@@ -112,7 +112,7 @@ export class Roster extends Component {
                             specialization: doctor.specialization
                         };
                     });
-                    console.log(doctors); // Log the mapped doctors array
+                    console.log(doctors);
                     this.setState({
                         doctors: doctors
                     });
@@ -174,7 +174,6 @@ export class Roster extends Component {
     }
 
     handleDayslotSelection(selectedId) {
-        // Update the state
         this.setState({
             selectedDayslotId: selectedId
         });
@@ -190,13 +189,12 @@ export class Roster extends Component {
         fetch(url)
             .then(res => res.json())
             .then(result => {
-                // If a roster with the same month, year, doctor, and dayslot already exists, show an alert and return
                 if (result.length > 0) {
                     alert('Roster already exists.');
                     return;
                 }
 
-                // Otherwise, make a POST request to create a new roster
+                // Making a POST request to create a new roster
                 fetch(variables.API_URL + 'roster/', {
                     method: 'POST',
                     headers: {
@@ -252,7 +250,7 @@ export class Roster extends Component {
         }
     }
 
-    
+
     render() {
         const {
             rosters,
@@ -279,7 +277,7 @@ export class Roster extends Component {
 
 
         const now = new Date();
-        const utcMonth = now.getUTCMonth() + 1; // getUTCMonth returns 0-based month index, so we add 1
+        const utcMonth = now.getUTCMonth() + 1;
         const utcYear = now.getUTCFullYear();
         const currentDayOfWeek = getCurrentDayOfWeek();
         const currentTimeSlot = getCurrentTimeSlot();
@@ -316,7 +314,7 @@ export class Roster extends Component {
                     <Table bordered className="mt-3 mx-auto" style={{ maxWidth: '90%', textAlign: 'center' }}>
                         <thead>
                             <tr>
-                                
+
                                 <th>Day</th>
                                 <th>Slot</th>
                                 <th>Doctor Name</th>
@@ -328,11 +326,10 @@ export class Roster extends Component {
                             {Object.keys(groupedByDay).map((day, dayIndex) => (
                                 <React.Fragment key={dayIndex}>
                                     {groupedByDay[day].map((roster, rosterIndex) => {
-                                        // Only render the roster if its month and year match the current UTC month and year
                                         if (roster.month === utcMonth && roster.year === utcYear) {
                                             return (
                                                 <tr key={roster.roster_id}>
-                                                    
+
                                                     <td>{day}</td>
                                                     <td>{roster.dayslot.slot}</td>
                                                     <td>{roster.doctor.doctor_name}</td>
@@ -379,10 +376,6 @@ export class Roster extends Component {
                             </Input>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="year">Year</Label>
-                            <Input type="number" name="year" id="year" value={this.state.year} onChange={this.changeYear} />
-                        </FormGroup>
-                        <FormGroup>
                             <Label for="doctor">Doctor</Label>
                             <Dropdown isOpen={this.state.dropdownOpenDoctor} toggle={this.toggleDropdownDoctor}>
                                 <DropdownToggle caret>
@@ -418,7 +411,6 @@ export class Roster extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.createClick}>Save</Button>
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
 
