@@ -82,7 +82,7 @@ function Login() {
     event.preventDefault();
     // Define the regular expression
     const emailPattern = /^u\d{7}@student\.cuet\.ac\.bd$/;
-    if (!emailPattern.test(email)) {
+    if (!emailPattern.test(email) || email.slice(1, 8) !== id) {
       // If the email does not match the pattern, show an error
       window.alert('Please input the e-mail provided by CUET');
       return;
