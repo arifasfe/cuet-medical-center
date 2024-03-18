@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import variables from './../variables';
 import { Table, Alert } from 'reactstrap';
 
+export function getCurrentDayOfWeek() {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return days[new Date().getDay()];
+}
+
 function getMonthName() {
     const months = [
         "January", "February", "March", "April", "May", "June",
@@ -19,11 +24,6 @@ export function getCurrentTimeSlot() {
     } else {
         return 'Noon';
     }
-}
-
-export function getCurrentDayOfWeek() {
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    return days[new Date().getDay()];
 }
 
 
