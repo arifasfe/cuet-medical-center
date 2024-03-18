@@ -62,7 +62,7 @@ class UserList(mixins.ListModelMixin,
             data = {
                 "status": response.status_code,
                 "status_description": response.status_text,
-                "description": "Student List retrieved successfully",
+                "description": "Students List retrieved successfully",
                 "data": response.data
             }
             return Response(data)
@@ -85,7 +85,7 @@ class UserDetail(mixins.RetrieveModelMixin,
             data = {
                 "status": response.status_code,
                 "status_description": response.status_text,
-                "description": "User details retrieved successfully",
+                "description": "User details retrieved successfully!",
                 "data": response.data
             }
             return Response(data)
@@ -101,7 +101,7 @@ class UserDetail(mixins.RetrieveModelMixin,
             data = {
                 "status": response.status_code,
                 "status_description": response.status_text,
-                "description": "User updated successfully",
+                "description": "Users information updated successfully",
                 "data": response.data
             }
             return Response(data)
@@ -118,7 +118,7 @@ class UserDetail(mixins.RetrieveModelMixin,
             data = {
                 "status": response.status_code,
                 "status_description": response.status_text,
-                "description": "Student updated successfully",
+                "description": "Students entry updated successfully",
                 "data": response.data
             }
             return Response(data)
@@ -160,7 +160,7 @@ class DoctorList(mixins.ListModelMixin,
             data = {
                 "status": response.status_code,
                 "status_description": response.status_text,
-                "description": "Doctor List retrieved successfully",
+                "description": "Doctor's list retrieved successfully",
                 "data": response.data
             }
             return Response(data)
@@ -176,7 +176,7 @@ class DoctorList(mixins.ListModelMixin,
             data = {
                 "status": response.status_code,
                 "status_description": response.status_text,
-                "description": "Doctor created successfully",
+                "description": "Doctor instance created successfully",
                 "data": response.data
             }
             return Response(data)
@@ -590,24 +590,5 @@ class PrescriptionDetail(mixins.RetrieveModelMixin,
             data = {
                 "status_code": status.HTTP_404_NOT_FOUND,
                 "status_description": str(e), # Include error message for debugging
-            }
-            return Response(data)
-
-
-        
-    def delete(self, request, *args, **kwargs):
-        try:
-            response = self.destroy(request, *args, *kwargs)
-            data = {
-                "status": response.status_code,
-                "status_description": response.status_text,
-                "description": "Prescription deleted successfully",
-                "data": response.data
-            }
-            return Response(data)
-        except Exception as e:  # Catch any errors
-            data = {
-                "status_code": status.HTTP_404_NOT_FOUND,
-                "status_description": str(e),  # Include error message for debugging
             }
             return Response(data)

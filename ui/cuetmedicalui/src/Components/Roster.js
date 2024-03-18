@@ -90,7 +90,7 @@ export class Roster extends Component {
                             slot: dayslot.slot
                         };
                     });
-                    console.log(dayslots); // Log the mapped dayslots array
+                    console.log(dayslots);
                     this.setState({
                         dayslots: dayslots
                     });
@@ -112,7 +112,7 @@ export class Roster extends Component {
                             specialization: doctor.specialization
                         };
                     });
-                    console.log(doctors); // Log the mapped doctors array
+                    console.log(doctors);
                     this.setState({
                         doctors: doctors
                     });
@@ -174,7 +174,6 @@ export class Roster extends Component {
     }
 
     handleDayslotSelection(selectedId) {
-        // Update the state
         this.setState({
             selectedDayslotId: selectedId
         });
@@ -183,20 +182,18 @@ export class Roster extends Component {
 
 
     createClick = () => {
-        // Construct the URL with the month, year, doctor, and dayslot as parameters
         const url = `${variables.API_URL}roster/?month=${this.state.month}&year=${this.state.year}&doctor=${this.state.selectedDoctorId}&dayslot=${this.state.selectedDayslotId}`;
 
-        // Make a GET request to the roster API
+        // Making GET request to the roster API
         fetch(url)
             .then(res => res.json())
             .then(result => {
-                // If a roster with the same month, year, doctor, and dayslot already exists, show an alert and return
                 if (result.length > 0) {
                     alert('Roster already exists.');
                     return;
                 }
 
-                // Otherwise, make a POST request to create a new roster
+                // Making POST request to create a new roster
                 fetch(variables.API_URL + 'roster/', {
                     method: 'POST',
                     headers: {
@@ -252,7 +249,7 @@ export class Roster extends Component {
         }
     }
 
-    
+
     render() {
         const {
             rosters,
@@ -279,7 +276,7 @@ export class Roster extends Component {
 
 
         const now = new Date();
-        const utcMonth = now.getUTCMonth() + 1; // getUTCMonth returns 0-based month index, so we add 1
+        const utcMonth = now.getUTCMonth() + 1;
         const utcYear = now.getUTCFullYear();
         const currentDayOfWeek = getCurrentDayOfWeek();
         const currentTimeSlot = getCurrentTimeSlot();
@@ -316,7 +313,7 @@ export class Roster extends Component {
                     <Table bordered className="mt-3 mx-auto" style={{ maxWidth: '90%', textAlign: 'center' }}>
                         <thead>
                             <tr>
-                                
+
                                 <th>Day</th>
                                 <th>Slot</th>
                                 <th>Doctor Name</th>
@@ -328,11 +325,10 @@ export class Roster extends Component {
                             {Object.keys(groupedByDay).map((day, dayIndex) => (
                                 <React.Fragment key={dayIndex}>
                                     {groupedByDay[day].map((roster, rosterIndex) => {
-                                        // Only render the roster if its month and year match the current UTC month and year
                                         if (roster.month === utcMonth && roster.year === utcYear) {
                                             return (
                                                 <tr key={roster.roster_id}>
-                                                    
+
                                                     <td>{day}</td>
                                                     <td>{roster.dayslot.slot}</td>
                                                     <td>{roster.doctor.doctor_name}</td>

@@ -14,12 +14,11 @@ urlpatterns = [
     path('user/', views.UserList.as_view(), name='user'),
     path('user/<int:pk>', views.UserDetail.as_view(), name='user_detail'),
 
+    path('ebooklet/', views.EBookletList.as_view(), name='ebooklet'),
+    path('ebooklet/<str:pk>/', views.EBookletDetail.as_view(), name='ebooklet_detail'),
 
     path('doctor/', views.DoctorList.as_view(), name='doctor'),
     path('doctor/<int:pk>/', views.DoctorDetail.as_view(), name='doctor_detail'),
-
-    path('ebooklet/', views.EBookletList.as_view(), name='ebooklet'),
-    path('ebooklet/<str:pk>/', views.EBookletDetail.as_view(), name='ebooklet_detail'),
 
     path('dayslot/', views.DaySlotList.as_view(), name='dayslot'),
     path('dayslot/<int:pk>/', views.DaySlotDetail.as_view(), name='dayslot_detail'),
@@ -31,5 +30,3 @@ urlpatterns = [
     path('prescription/<int:pk>/', views.PrescriptionDetail.as_view(), name='prescription_detail')
 
 ]
-#To do
-#email unique banate hbe

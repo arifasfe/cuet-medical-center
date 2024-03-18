@@ -48,15 +48,15 @@ class LoginSerializer(serializers.Serializer):
         password = attrs.get('password')
 
         if not id or not password:
-            raise serializers.ValidationError("Please give both email and password.")
+            raise serializers.ValidationError("Please provide both email and password.")
 
         if not User.objects.filter(id=id).exists():
-            raise serializers.ValidationError('id does not exist.')
+            raise serializers.ValidationError('The id does not exist.')
 
         user = authenticate(request=self.context.get('request'), id=id,
                             password=password)
         if not user:
-            raise serializers.ValidationError("Wrong Credentials.")
+            raise serializers.ValidationError("Wrong Credentials provided, Try Again.")
 
         attrs['user'] = user
         return attrs
@@ -130,20 +130,6 @@ class PrescriptionSerializer(serializers.ModelSerializer):
         fields = '__all__'
     def to_representation(self, instance):
         representation = super().to_representation(instance)
-        representation['doctor'] = Sub_DoctorSerializer(instance.doctor).data
         representation['booklet'] = EBookletSerializer(instance.booklet).data
+        representation['doctor'] = Sub_DoctorSerializer(instance.doctor).data
         return representation
-    
-
-""" 1804066
-Abdus salam
-ME
-salamAbdus@gmail.com
-01581234444
-23/A, Jame mosjid, Anderkillah, Chattogram
-M
-Shiekh Russel Hall
-310
-O+
-DC12V9X44
-qwerty """
