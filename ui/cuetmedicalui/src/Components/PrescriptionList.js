@@ -45,18 +45,19 @@ export class PrescriptionList extends Component {
 
     refreshList() {
         fetch(variables.API_URL + 'prescription/')
-        .then(response => response.json())
-        .then(data => {
-            if ('data' in data && Array.isArray(data.data)) {
-                let sortedData = data.data.sort((a, b) => b.prescription_id - a.prescription_id); // Sort in descending order of prescription_id
-                this.setState({
-                    prescriptions: sortedData
-                });
-                console.log(this.state.prescriptions);
-            } else {
-                console.error('Expected an object with a data property containing a single booklet object, but got ', data);
-            }
-        });
+            .then(response => response.json())
+            .then(data => {
+                if ('data' in data && Array.isArray(data.data)) {
+                    let sortedData = data.data.sort((a, b) => b.prescription_id - a.prescription_id); // Sort in descending order of prescription_id
+                    this.setState({
+                        prescriptions: sortedData
+                    });
+                    console.log(this.state.prescriptions);
+                } else {
+                    console.error('Expected an object with a data property containing a single booklet object, but got ', data);
+                }
+            });
+    
 
         fetch(variables.API_URL + 'ebooklet/')
             .then(response => response.json())
