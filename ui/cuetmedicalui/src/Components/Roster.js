@@ -210,10 +210,10 @@ export class Roster extends Component {
                 })
                     .then(res => res.json())
                     .then(result => {
-                        alert(JSON.stringify(result));
+                        alert('Roster entry added Successfully!');
                         this.refreshList();
                     }, (error) => {
-                        alert('Failed');
+                        alert('Roster entry Failed');
                     })
             })
     }
@@ -240,11 +240,11 @@ export class Roster extends Component {
             })
                 .then(res => res.json())
                 .then(result => {
-                    alert(result);
+                    alert('Roster entry deleted successfully!');
                     this.refreshList();
 
                 }, (error) => {
-                    alert('Failed');
+                    alert('Roster entry deletion Failed');
                 })
         }
     }
