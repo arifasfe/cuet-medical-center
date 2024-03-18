@@ -197,7 +197,33 @@ export class Doctor extends Component {
                     </tbody>
                 </Table>
 
-                
+                <Modal isOpen={showModal} toggle={this.toggle}>
+                    <ModalHeader toggle={this.toggle}>{modalTitle}</ModalHeader>
+                    <ModalBody>
+                        <FormGroup>
+                            <Label for="doctorName">Doctor Name</Label>
+                            <Input type="text" name="doctorName" id="doctorName" placeholder="Doctor Name" value={doctor_name} onChange={this.changeDoctorName} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="specialization">Specialization</Label>
+                            <Input type="text" name="specialization" id="specialization" placeholder="Specialization" value={specialization} onChange={this.changeSpecialization} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="address">Address</Label>
+                            <Input type="text" name="address" id="address" placeholder="Address" value={address} onChange={this.changeAddress} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="phone">Phone No.</Label>
+                            <Input type="text" name="phone" id="phone" placeholder="Phone No." value={phone} onChange={this.changePhone} />
+                        </FormGroup>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={doctor_id === 0 ? this.createClick : this.updateClick}>
+                            {doctor_id === 0 ? 'Create' : 'Update'}
+                        </Button>{' '}
+                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
             </div>
         )
     }
