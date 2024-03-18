@@ -277,31 +277,7 @@ export class Booklet extends Component {
                     </ModalFooter>
                 </Modal>
 
-                <Modal isOpen={!!this.state.selectedBooklet} toggle={() => this.setState({ selectedBooklet: null })}>
-                    <ModalHeader toggle={() => this.setState({ selectedBooklet: null })}>Booklet Details</ModalHeader>
-                    <ModalBody style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        {this.state.selectedBooklet && (
-                            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                                <div>
-                                    <p>ID: {this.state.selectedBooklet.booklet_id}</p>
-                                    <p>Student ID: {this.state.selectedBooklet.student.id}</p>
-                                    <p>Name: {this.state.selectedBooklet.student.first_name} {this.state.selectedBooklet.student.last_name}</p>
-                                    <p>Department: {this.state.selectedBooklet.student.department}</p>
-                                    <p>Phone: {this.state.selectedBooklet.student.phone}</p>
-                                    <p>Permanent Address: {this.state.selectedBooklet.student.permanent_address}</p>
-                                    <p>Hall Name: {this.state.selectedBooklet.student.hall_name}</p>
-                                    <p>Room No: {this.state.selectedBooklet.student.room_no}</p>
-                                    <p>Gender: {this.state.selectedStudent.gender}</p>
-                                    <p>Blood Group: {this.state.selectedBooklet.student.blood_group}</p>
-                                </div>
-                                <img src={variables.CLOUDINARY_BASE_URL + this.state.selectedStudent.image} alt="Student" style={{ width: '120px', height: '140px' }} />
-                            </div>
-                        )}
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={() => this.setState({ selectedBooklet: null })}>Close</Button>
-                    </ModalFooter>
-                </Modal>
+                
 
 
             </div>
