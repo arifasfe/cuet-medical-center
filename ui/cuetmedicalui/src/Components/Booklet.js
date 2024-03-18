@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import variables from './../variables';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Table, Modal, ModalHeader, ModalBody, FormGroup, Label, Input, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 export class Booklet extends Component {
@@ -82,7 +82,9 @@ export class Booklet extends Component {
         this.refreshList();
     }
     changeBookletId = (e) => {
+
         this.setState({ booklet_id: e.target.value })
+
     }
 
     toggle = () => {
@@ -130,24 +132,30 @@ export class Booklet extends Component {
 
 
     createClick = () => {
-        fetch(variables.API_URL + 'ebooklet/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                booklet_id: this.state.booklet_id,
-                student: this.state.selectedStudentId
+        const bookletPattern = /^B\d{7}$/;
+        if (bookletPattern.test(this.state.booklet_id) && this.state.booklet_id.slice(1, 8) == this.state.selectedStudentId) {
+            fetch(variables.API_URL + 'ebooklet/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    booklet_id: this.state.booklet_id,
+                    student: this.state.selectedStudentId
+                })
             })
-        })
-            .then(res => res.json())
-            .then(result => {
-                alert(JSON.stringify(result));
-                this.refreshList();
-            }, (error) => {
-                alert('Failed');
-            })
+                .then(res => res.json())
+                .then(result => {
+                    alert('E-Booklet creation successful');
+                    this.refreshList();
+                }, (error) => {
+                    alert('E-Booklet creation Failed');
+                })
+        } else {
+            window.alert('Please provide a valid Booklet ID! e.g: B1804001');
+            return;
+        }
     }
 
 
