@@ -1,5 +1,5 @@
-import React, { Component} from 'react';
-import { Button, Alert, Badge, Modal, ModalHeader, ModalBody,Input, ModalFooter, Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Alert, Badge, Modal, ModalHeader, ModalBody, Input, ModalFooter, Card, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 import variables from './../variables';
 
 export class StudentBooklet extends Component {
@@ -55,26 +55,26 @@ export class StudentBooklet extends Component {
 
     refreshList() {
         fetch(variables.API_URL + 'prescription/')
-        .then(response => response.json())
-        .then(data => {
-            if ('data' in data && Array.isArray(data.data)) {
-                let sortedData = data.data
-                    .filter(prescription => prescription.booklet.student.id === this.state.user.id)
-                    .sort((a, b) => b.prescription_id - a.prescription_id); // Sort in descending order of prescription_id
+            .then(response => response.json())
+            .then(data => {
+                if ('data' in data && Array.isArray(data.data)) {
+                    let sortedData = data.data
+                        .filter(prescription => prescription.booklet.student.id === this.state.user.id)
+                        .sort((a, b) => b.prescription_id - a.prescription_id); // Sort in descending order of prescription_id
 
-                // Set the initial state of confirmation based on the data received from the backend
-                const initialConfirmation = sortedData.reduce((acc, prescription) => {
-                    acc[prescription.prescription_id] = prescription.confirmation || false;
-                    return acc;
-                }, {});
-                this.setState({
-                    prescriptions: sortedData,
-                    confirmation: initialConfirmation
-                });
-            } else {
-                console.error('Expected an object with a data property containing a single booklet object, but got ', data);
-            }
-        });
+                    // Set the initial state of confirmation based on the data received from the backend
+                    const initialConfirmation = sortedData.reduce((acc, prescription) => {
+                        acc[prescription.prescription_id] = prescription.confirmation || false;
+                        return acc;
+                    }, {});
+                    this.setState({
+                        prescriptions: sortedData,
+                        confirmation: initialConfirmation
+                    });
+                } else {
+                    console.error('Expected an object with a data property containing a single booklet object, but got ', data);
+                }
+            });
         fetch(variables.API_URL + 'ebooklet/')
             .then(response => response.json())
             .then(data => {
@@ -113,7 +113,7 @@ export class StudentBooklet extends Component {
             const dateA = new Date(a.date_time).getTime();
             const dateB = new Date(b.date_time).getTime();
 
-            
+
             return dateB - dateA;
         });
 
@@ -127,7 +127,7 @@ export class StudentBooklet extends Component {
             selectedPrescription: prescription_id
         }));
     }
-    
+
     handleMouseEnter(prescription_id) {
         this.setState({ hover: true, hoverId: prescription_id });
     }
@@ -143,23 +143,23 @@ export class StudentBooklet extends Component {
             console.log(this.state.modalOpen);
         });
     }
-    
-    
+
+
 
     toggleConfirmModal = () => {
         this.setState(prevState => ({
-          confirmModalOpen: !prevState.confirmModalOpen,
+            confirmModalOpen: !prevState.confirmModalOpen,
         }));
-     };
+    };
 
-     closeModal() {
+    closeModal() {
         this.setState({
             modalMessage: '',
             modalOpen: false,
         });
     }
-    
-     handleConfirm = async () => {
+
+    handleConfirm = async () => {
         // Logic to update the confirmation status
         const response = await fetch(`${variables.API_URL}prescription/${this.state.selectedPrescription}/`, {
             method: 'PATCH',
@@ -196,11 +196,11 @@ export class StudentBooklet extends Component {
                 {this.state.prescriptions.map((prescription, index) => (
                     <Card key={index} onClick={() => this.toggle(prescription.prescription_id)} onMouseEnter={() => this.handleMouseEnter(prescription.prescription_id)} onMouseLeave={this.handleMouseLeave} style={{ backgroundColor: '#FAFAFA', borderRadius: '5px', marginBottom: '10px', transform: this.state.hover && this.state.hoverId === prescription.prescription_id ? 'scale(1.05)' : 'scale(1)', transition: 'transform 0.3s ease-in-out' }}>
                         <CardBody>
-                        <Badge pill color={this.state.confirmation[prescription.prescription_id] ? "success" : "danger"} style={{ position: 'absolute', top: '10px', right: '10px' }}>
-                            {this.state.confirmation[prescription.prescription_id] ? "Confirmed" : "Not Confirmed"}
-                        </Badge>
+                            <Badge pill color={this.state.confirmation[prescription.prescription_id] ? "success" : "danger"} style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                                {this.state.confirmation[prescription.prescription_id] ? "Confirmed" : "Not Confirmed"}
+                            </Badge>
                             <CardTitle tag="h5">Prescription {prescription.prescription_id}</CardTitle>
-                            <CardSubtitle tag="h6" className="mb-2 text-muted">Ebooklet ID: {prescription.booklet?.booklet_id}</CardSubtitle>
+                            <CardSubtitle tag="h6" className="mb-1 text-muted">Ebooklet ID: {prescription.booklet?.booklet_id}</CardSubtitle>
 
                             <Button outline color="info">Open Prescription</Button>
                         </CardBody>
@@ -211,21 +211,21 @@ export class StudentBooklet extends Component {
                                     <Card style={{ border: '1px solid #000', boxShadow: '0px 4px 8px 0px rgba(0,0,0,0.2)' }}>
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Doctor Information</div>
-                                                <CardSubtitle tag="h6" className="mb-2 text-muted">Name: {prescription.doctor.doctor_name}</CardSubtitle>
+                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>Doctor Information</div>
+                                                <CardSubtitle tag="h5" className=" text-muted">Name: {prescription.doctor.doctor_name}</CardSubtitle>
                                             </CardBody>
                                         </Card>
                                         <hr />
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Complaints</div>
-                                                <CardSubtitle tag="h6" className="mb-2 text-muted" style={{ marginBottom: '30px' }}>{prescription.complaints}</CardSubtitle>
+                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '10px' }}>Complaints</div>
+                                                <CardSubtitle tag="h5" className=" text-muted" style={{ marginBottom: '0px' }}>{prescription.complaints}</CardSubtitle>
                                             </CardBody>
                                         </Card>
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '20px' }}>Vitals</div>
+                                                <div style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '0px' }}>Vitals</div>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">Pulse Rate: {prescription.pulse_rate}</CardSubtitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">BP: {prescription.bp}</CardSubtitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">Temp: {prescription.temp}</CardSubtitle>
@@ -236,29 +236,29 @@ export class StudentBooklet extends Component {
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>Diagnosis</div>
-                                                <CardSubtitle tag="h6" className="mb-2 text-muted">{prescription.diagnosis}</CardSubtitle>
+                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '2px' }}>Diagnosis</div>
+                                                <CardSubtitle tag="h5" className="mb-1 text-muted">{prescription.diagnosis}</CardSubtitle>
                                             </CardBody>
                                         </Card>
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>R<sub>x</sub></div>
-                                                <CardSubtitle tag="h6" className="mb-2 text-muted">{prescription.rx}</CardSubtitle>
+                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '2px' }}>R<sub>x</sub></div>
+                                                <CardSubtitle tag="h5" className="mb-1 text-muted">{prescription.rx}</CardSubtitle>
                                             </CardBody>
                                         </Card>
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>Investigation</div>
-                                                <CardSubtitle tag="h6" className="mb-2 text-muted">{prescription.investigation}</CardSubtitle>
+                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '2px' }}>Investigation</div>
+                                                <CardSubtitle tag="h5" className="mb-1 text-muted">{prescription.investigation}</CardSubtitle>
                                             </CardBody>
                                         </Card>
 
                                         <Card style={{ border: 'none' }}>
                                             <CardBody>
-                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>Lifestyle</div>
-                                                <CardSubtitle tag="h6" className="mb-2 text-muted">{prescription.lifestyle}</CardSubtitle>
+                                                <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '2px' }}>Lifestyle</div>
+                                                <CardSubtitle tag="h5" className="mb-1 text-muted">{prescription.lifestyle}</CardSubtitle>
                                             </CardBody>
                                         </Card>
                                     </Card>
@@ -267,12 +267,12 @@ export class StudentBooklet extends Component {
                                 {this.state.selectedPrescription === prescription.prescription_id && !this.state.confirmation[prescription.prescription_id] && !this.state.updatedPrescriptions.includes(prescription.prescription_id) && (
                                     <Card style={{ border: 'none' }}>
                                         <CardBody>
-                                            <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '20px' }}>Confirmation</div>
+                                            <div style={{ fontSize: '25px', fontWeight: 'bold', marginBottom: '2px' }}>Confirmation</div>
                                             <Button color="primary" onClick={this.toggleConfirmModal}>Update Confirmation</Button>
                                         </CardBody>
                                     </Card>
                                 )}
-                
+
                                 <Modal isOpen={this.state.confirmModalOpen} toggle={this.toggleConfirmModal}>
                                     <ModalHeader toggle={this.toggleConfirmModal}>Confirmation</ModalHeader>
                                     <ModalBody>
@@ -288,15 +288,15 @@ export class StudentBooklet extends Component {
                         </Modal>
                     </Card>
                 ))}
-            <Modal isOpen={this.state.modalOpen} toggle={this.closeModal}>
-                <ModalBody>
-                    {this.state.modalMessage}
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={this.closeModal}>OK</Button>
-                </ModalFooter>
-            </Modal>
-        </div>
+                <Modal isOpen={this.state.modalOpen} toggle={this.closeModal}>
+                    <ModalBody>
+                        {this.state.modalMessage}
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" onClick={this.closeModal}>OK</Button>
+                    </ModalFooter>
+                </Modal>
+            </div>
 
         );
     }
