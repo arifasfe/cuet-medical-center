@@ -90,7 +90,7 @@ export class Roster extends Component {
                             slot: dayslot.slot
                         };
                     });
-                    console.log(dayslots); // Log the mapped dayslots array
+                    console.log(dayslots);
                     this.setState({
                         dayslots: dayslots
                     });
@@ -182,10 +182,9 @@ export class Roster extends Component {
 
 
     createClick = () => {
-        // Construct the URL with the month, year, doctor, and dayslot as parameters
         const url = `${variables.API_URL}roster/?month=${this.state.month}&year=${this.state.year}&doctor=${this.state.selectedDoctorId}&dayslot=${this.state.selectedDayslotId}`;
 
-        // Make a GET request to the roster API
+        // Making GET request to the roster API
         fetch(url)
             .then(res => res.json())
             .then(result => {
@@ -194,7 +193,7 @@ export class Roster extends Component {
                     return;
                 }
 
-                // Making a POST request to create a new roster
+                // Making POST request to create a new roster
                 fetch(variables.API_URL + 'roster/', {
                     method: 'POST',
                     headers: {
@@ -376,6 +375,10 @@ export class Roster extends Component {
                             </Input>
                         </FormGroup>
                         <FormGroup>
+                            <Label for="year">Year</Label>
+                            <Input type="number" name="year" id="year" value={this.state.year} onChange={this.changeYear} />
+                        </FormGroup>
+                        <FormGroup>
                             <Label for="doctor">Doctor</Label>
                             <Dropdown isOpen={this.state.dropdownOpenDoctor} toggle={this.toggleDropdownDoctor}>
                                 <DropdownToggle caret>
@@ -411,6 +414,7 @@ export class Roster extends Component {
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.createClick}>Save</Button>
+                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
 
