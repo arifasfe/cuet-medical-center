@@ -47,7 +47,7 @@ function NavbarComponent({ toggle, isOpen, students }) {
             </NavItem>
             <NavItem style={{ paddingRight: "10px" }}>
               <NavLink tag={Link} to="/admin/verification" className="btn btn-light btn-outline-primary">
-                Verification 
+                Verification
                 {students.length > 0 && <Badge color="danger">{students.length}</Badge>}
               </NavLink>
             </NavItem>
